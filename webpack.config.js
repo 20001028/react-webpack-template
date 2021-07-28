@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     mode: "development",
-    entry: "./src/index.tsx",
+    entry: "./src/index.js",
     output: {
         filename: "bundle.js",
         path: __dirname + "/dist",
@@ -20,8 +20,16 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
-            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" }
+            {
+                test: /\.js|jsx?$/, loader: "babel-loader", exclude: /node_modules/, options: {
+                    plugins: ['syntax-dynamic-import'],
+                    // 解析js中的jsx必须配置
+                    presets: ['@babel/preset-env', '@babel/preset-react']
+                },
+            },
+            // { test: /\.tsx?$/, loader: "awesome-typescript-loader" },
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
+            { test: /\.css?$/, use: ['style-loader', 'css-loader'] },
         ]
     },
     plugins: [

@@ -1,10 +1,10 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-console.log(React);
+import 'antd/dist/antd.css';
 
-import { Hello } from "./components/Hello";
+import {TopNavMenu} from './components/TopNavMenu';
 
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="React" />,
+    <TopNavMenu></TopNavMenu>,
     document.getElementById("example")
 );
