@@ -1,1 +1,1 @@
-# vite-react-project-template
+# react-webpack-template
