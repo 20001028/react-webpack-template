@@ -6,13 +6,15 @@ import {
 } from "@ant-design/icons";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import '../static/css/components/top-nav-menu.css';
 
 const { SubMenu } = Menu;
 
-class TopNavMenu extends React.Component {
-  state = {
-    current: "mail",
-  };
+export class TopNavMenu extends React.Component {
+  constructor(props) {
+    super();
+    this.state = { menu: props.menu, current: props.menu[0].name };
+  }
 
   handleClick = (e) => {
     console.log("click ", e);
@@ -21,44 +23,22 @@ class TopNavMenu extends React.Component {
 
   render() {
     const { current } = this.state;
+    const MENU_ITEMS = this.state.menu.map(val => {
+      return (
+        <Menu.Item key={val.name} icon={val.icon} className="menu-item">
+          {val.name}
+        </Menu.Item>
+      )
+    })
     return (
       <Menu
         onClick={this.handleClick}
         selectedKeys={[current]}
         mode="horizontal"
+        className="top-nav-menu"
       >
-        <Menu.Item key="mail" icon={<MailOutlined />}>
-          Navigation One
-        </Menu.Item>
-        <Menu.Item key="app" disabled icon={<AppstoreOutlined />}>
-          Navigation Two
-        </Menu.Item>
-        <SubMenu
-          key="SubMenu"
-          icon={<SettingOutlined />}
-          title="Navigation Three - Submenu"
-        >
-          <Menu.ItemGroup title="Item 1">
-            <Menu.Item key="setting:1">Option 1</Menu.Item>
-            <Menu.Item key="setting:2">Option 2</Menu.Item>
-          </Menu.ItemGroup>
-          <Menu.ItemGroup title="Item 2">
-            <Menu.Item key="setting:3">Option 3</Menu.Item>
-            <Menu.Item key="setting:4">Option 4</Menu.Item>
-          </Menu.ItemGroup>
-        </SubMenu>
-        <Menu.Item key="alipay">
-          <a
-            href="https://ant.design"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Navigation Four - Link
-          </a>
-        </Menu.Item>
+        {MENU_ITEMS}
       </Menu>
     );
   }
 }
-
-export { TopNavMenu };

@@ -1,10 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import 'antd/dist/antd.css';
-
-import {TopNavMenu} from './components/TopNavMenu';
+import './static/css/index.css';
+import {App} from '././views/app';
 
 ReactDOM.render(
-    <TopNavMenu></TopNavMenu>,
-    document.getElementById("example")
+    <App></App>,
+    document.getElementById("app")
 );
